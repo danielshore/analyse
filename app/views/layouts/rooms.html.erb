@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<META http-equiv="expires" content="0">
+<meta name="msvalidate.01" content="6A0C50B885EB513E4DA3B73F70FE18A7" />
+  <%if 1==@maps_on%>
+  <script src="http://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+  	google.load("jquery", "1.2.6");
+  </script>
+  <%=javascript_include_tag 'jquery.ajaxQueue.js','thickbox-compressed.js','jquery.autocomplete.js'%>
+  <%else%>
+  <%=javascript_include_tag 'jquery-latest.js','jquery.ajaxQueue.js','thickbox-compressed.js','jquery.autocomplete.js'%>
+  
+  <%end%>
+  
+  <%= stylesheet_link_tag 'default','jquery.autocomplete.css','thickbox.css' %>
+  <%if 1==@maps_on%>
+  <%if ENV["RAILS_ENV"]=="development"%>
+  <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAWa2TCqKZ_2v1kZw_C5rSdRSZP5yIh1XGgz0UvXLSlMDRf4mUDBSwZ01NLo2wO-7uxybymFWZhrfUSQ"
+       type="text/javascript"></script>
+  <%else%>
+  <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAWa2TCqKZ_2v1kZw_C5rSdRRm2TIFQ674o3QHgvWRBJDyC3XTnxT_xbsrTsTTenHmXhsFu2Uyxnv-RA"
+       type="text/javascript"></script>
+  <%end%>  
+  <%end%>   
+     <script type="text/javascript">
+     var map_loaded=false;
+     //<![CDATA[
+
+     function load() {
+       if (1==<%=@maps_on%>){
+          if (GBrowserIsCompatible()) {
+            //if (area_id!=0) {
+              map = new GMap2(document.getElementById("map"));
+            //}
+         }
+       }
+     }
+
+     //]]>
+     </script>
+  <script>
+    
+    
+    var night=<%=@night%>;
+    var duration=<%=@duration%>;
+    var area_id=<%=@area_id%>;
+    var distance=<%=@distance%>
+    var point=Array();
+    var max_price=<%=@max_price%>;
+    <%if 1==@maps_on%>
+    var bounds = new GLatLngBounds();
+    var map;
+    <%end%>
+    
+    
+    function change_time(){
+      
+      update_criteria();
+    }
+    
+    function change_price(){
+      
+      update_criteria();
+    }
+    
+    function add_point(id){
+    	map.addOverlay(new GMarker(point[id]));
+    	//map.panTo((point[id]));
+    }
+
+    function remove_point(id){
+    	map.clearOverlays();
+    }
+
+    function update_area(){
+      update_criteria();
+    }
+
+    function update_criteria(){
+      max_price=$('#price').val();
+      night=$('#night').val();
+      duration=$('#duration').val();
+      distance=$('#distance').val();
+      if (area_id==0){
+        //$('#content').hide();
+      }else{
+        $('#content').show();
+        if (map_loaded==false){
+          load();
+        }
+        
+      }
+      //alert("updating");
+
+      $('#results').html("<img src='/images/loading.gif' style='border:0px;'>");
+      $('#results').load("/rooms/index/-1", { 
+        night: night,
+        max_price: max_price,
+        duration: duration,
+        distance: distance,
+        area_id: area_id,
+        update: "yes",
+        random: Math.floor(Math.random()*11)
+      },function(data)
+      {  
+        run_js();
+      })
+      
+     
+      
+
+
+    }
+
+    function findValueCallback(event, data, formatted) {
+  		$("<li>").html( !data ? "No match!" : "Selected: " + formatted).appendTo("#result");
+  	}
+
+  	function formatItem(row) {
+  		return row[0];
+  	}
+  	function formatResult(row) {
+  		return row[0].replace(/(<.+?>)/gi, '');
+  	}
+
+    $(document).ready(function(){
+      
+      $("#CityAjax").autocomplete('/rooms/placeauto', {
+    		width: 300,
+    		multiple: false,
+    		matchContains: true,
+    		formatItem: formatItem,
+    		formatResult: formatResult
+    	});
+
+    	$("#CityAjax").result(function(event, data, formatted) {
+    		if (data)
+    			area_id=data[1];
+    			update_criteria();		
+    	});
+      load();
+      $('#content').hide();
+      update_criteria();
+   });
+  </script>
+  
+  
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <meta name="verify-v1" content="kM8F7VUYpcqxlDHUQufIjcXG7J8+HqJ9+KsK0DjJIBg=" />
+  <title>The best late room deals from UK's best hotels</title>
+
+  <%
+  now_date= Date.today
+  format="%a %d %b"
+
+  %>
+  <script type="text/javascript">
+    var dates = new Array(7);
+    dates[0]="Today"
+    dates[1]="Tomorrow"
+    dates[2]="<%=(now_date+2).strftime(format)%>"
+    dates[3]="<%=(now_date+3).strftime(format)%>"
+    dates[4]="<%=(now_date+4).strftime(format)%>"
+    dates[5]="<%=(now_date+5).strftime(format)%>"
+    dates[6]="<%=(now_date+6).strftime(format)%>"
+  </script>
+  
+
+
+</head>
+<body onload="load()" onunload="if (1==<%=@maps_on%>) {GUnload()}">
+
+
+
+<p style="color: green"><%= flash[:notice] %></p>
+
+<%= yield  %>
+
+<%if 1==@maps_on%>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-6261480-1");
+pageTracker._trackPageview();
+</script>
+<%end%>
+
+</body>
+</html>

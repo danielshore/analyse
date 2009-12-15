@@ -1,0 +1,13 @@
+<html>
+<head>
+<%=javascript_include_tag 'jquery-latest.js','wikiplaces.js'%>
+
+<%= stylesheet_link_tag 'wikiplaces' %>
+</head>
+
+<body onload="onLoad();" onunload="unLoad();">
+<%= yield  %>
+</body>
+</html>
+
+

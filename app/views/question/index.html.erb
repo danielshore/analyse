@@ -1,0 +1,8 @@
+<%@questions.each do |q|%>
+
+<div class="post"> 
+	<div class="title"><a href="/q/<%=q.id%>"><%=q.text%></a></div> 
+	<div class="copy"><img src="<%=q.profile_pic%>"> via <a href="http://twitter.com/<%=q.username%>"><%=q.username%></a><%=q.created_at.strftime(" on %m/%d/%Y")%></div>
+</div>
+
+<%end%>

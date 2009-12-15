@@ -1,0 +1,30 @@
+<div style="font-family:'Arial', Helvetica, sans-serif;">
+<form>
+Account:<br>
+<select name="account">
+<%@accounts.each do |a|%>
+
+<%if a.client_account==@client_account%> 
+	<option value="<%=a.client_account%>" selected><%=a.client_account%></option>
+<%else%>
+	<option value="<%=a.client_account%>"><%=a.client_account%></option>
+<%end%>
+<%end%>
+</select>
+<br>
+<br>
+<input type="submit" value="Submit">
+</form>
+<%if @links!=nil%>
+	<%@links.each do |l|%>
+		<a href="<%=l.url%>"><%=l.title%></a>
+		<p style="font-size:12px">
+			<%=l.text%> 
+			<a href="http://twitter.com/<%=l.username%>" target="_blank"><%=l.username%></a> (<%=time_ago_in_words(l.posted)%> ago)
+		</p>
+		<br>
+	<%end%>
+<%else%>
+	No results found
+<%end%>
+</div>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>London Audio Guide iPhone App</title>
+<%= stylesheet_link_tag 'layout'%>
+<%= stylesheet_link_tag 'style'%>
+<meta name="DESCRIPTION" content="A location aware iPhone / iPod Touch guide with 6 hours of professional quality audio on 150 of London's top landmarks">
+<meta name="KEYWORDS" content="London audio guide,London audio tour,audio, MP3, iPod, city guides, walking tour, London, iPhone">
+
+
+<script src="/javascripts/maxheight.js" type="text/javascript"></script>
+
+</head>
+
+<body id="page7" onload="new ElementMaxHeight();load();" onunload="unload();">
+	
+
+	<div id="site_center">
+		<div id="main">
+			<!-- header -->
+			<div id="header">
+				<div class="line_top">
+					<div class="line_bottom">
+						<div class="t_l">
+							
+						  <div class="t_r">
+								<div class="links">
+									<a href="/ilondon">Home</a> | <a href="/londonaudioguide">Sample - online guide</a> | <a href="/ilondon/contact">Contact / Support</a>
+								</div>
+						    	<img alt="" stye="border:0px solid black; vertical-align:top; horizontal-align:center; margin:0px;" src="http://s3.amazonaws.com/Audio_Guides/Thumbnails/iLondon/bg_header.jpg" />		
+											
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- content -->
+			<div id="content">
+				 <%=yield%>
+				
+			</div>
+			<!-- footer -->
+			<div id="footer">
+				<div class="box">
+					<div class="column1">
+						ComeAwayWithMe.co.uk &copy; 2009
+					</div>
+					<div class="column2">
+											
+					</div>
+					<div class="clear"></div>
+				</div>			
+			</div>
+		</div>
+	</div>	
+</body>
+</html>

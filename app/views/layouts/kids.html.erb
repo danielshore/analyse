@@ -1,0 +1,11 @@
+<html>
+<head>
+<%=javascript_include_tag 'jquery-latest.js','kids.js','labs_json.js','deserialize.js','jquery.dirtyform.js'%>
+
+<%= stylesheet_link_tag 'kids' %>
+</head>
+
+<body onload="onLoad();" onunload="unLoad();">
+<%= yield  %>
+</body>
+</html>

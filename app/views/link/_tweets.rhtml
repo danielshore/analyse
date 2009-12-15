@@ -1,0 +1,52 @@
+
+<div style="font-family:'Arial', Helvetica, sans-serif;">
+<form>
+Search:<br> 
+<input type="text" name="search" value="<%=@search_term%>" size="20"><br><br>
+Account:<br>
+<select name="account">
+<%@accounts.each do |a|%>
+
+<%if a.client_account==@client_account%> 
+	<option value="<%=a.client_account%>" selected><%=a.client_account%></option>
+<%else%>
+	<option value="<%=a.client_account%>"><%=a.client_account%></option>
+<%end%>
+<%end%>
+</select>
+<br>
+<br>
+<input type="submit" value="Submit">
+</form>
+<%if @tweets!=nil%>
+	<%@tweets.each do |t|%>
+		<%
+			t.text.scan(/\b(?:https?:\/\/|www\.)\S+\b/).each do |link|
+				
+				t.text=t.text.gsub(link.to_s,"<a href='#{link.to_s}' target='_blank'>#{link.to_s}</a>")
+			end
+		t.text.scan(/@([a-z0-9_]+)/i).each do |username|
+		
+			t.text=t.text.gsub("@"+username.to_s,"<a href='www.twitter.com/#{username.to_s}' target='_blank'>@#{username.to_s}</a>")
+		end
+	
+		#url_regexp = / ?(http[s]?:\/\/\w)/
+		#url = t.text.split.grep(url_regexp).to_s
+		#t.text=t.text.gsub(url,"<a href=\"" + url + "\" target=\"_blank\">" + url + "</a>")
+		#url_regexp = / ?(@\w+)/
+		#url = t.text.split.grep(url_regexp).to_s
+		#t.text=t.text.gsub(url,"<a href='http://twitter.com/"+url.gsub("@","")+"'>"+url.gsub("@","")+"</a>")
+	
+		
+		
+		%>
+ 		<%=t.text%>
+		<p style="font-size:12px">
+			<a href="http://twitter.com/<%=t.screen_name%>" target="_blank"><%=t.screen_name%></a> (<%=t.followers_count.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse%> followers, <%=t.friends_count.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse%> following) <%=time_ago_in_words(t.created_at)%> ago
+		</p>
+		<br>
+	<%end%>
+<%else%>
+	No results found
+<%end%>
+</div>

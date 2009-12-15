@@ -1,0 +1,88 @@
+  [4;36;1mSQL (91.7ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinkController#index (for 127.0.0.1 at 2009-12-15 11:35:43) [GET]
+  [4;35;1mLink Load (0.0ms)[0m   [0mMysql::Error: Table 'db1.linkexcludes' doesn't exist: SELECT *,count(distinct username) as c,id FROM `links` WHERE (url not in (select url from linkexcludes) AND username not in (select username from blacklists) and posted>'2009-12-15 05:35:43' ) GROUP BY url ORDER BY count(distinct username) desc LIMIT 100[0m
+
+ActiveRecord::StatementInvalid (Mysql::Error: Table 'db1.linkexcludes' doesn't exist: SELECT *,count(distinct username) as c,id FROM `links` WHERE (url not in (select url from linkexcludes) AND username not in (select username from blacklists) and posted>'2009-12-15 05:35:43' )  GROUP BY url ORDER BY count(distinct username) desc LIMIT 100):
+  app/controllers/link_controller.rb:22:in `index'
+
+Rendered rescues/_trace (42.7ms)
+Rendered rescues/_request_and_response (1.8ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (90.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinkController#index (for 127.0.0.1 at 2009-12-15 11:37:47) [GET]
+  [4;35;1mLink Load (0.0ms)[0m   [0mMysql::Error: Table 'db1.blacklists' doesn't exist: SELECT *,count(distinct username) as c,id FROM `links` WHERE (url not in (select url from linkexcludes) AND username not in (select username from blacklists) and posted>'2009-12-15 05:37:47' ) GROUP BY url ORDER BY count(distinct username) desc LIMIT 100[0m
+
+ActiveRecord::StatementInvalid (Mysql::Error: Table 'db1.blacklists' doesn't exist: SELECT *,count(distinct username) as c,id FROM `links` WHERE (url not in (select url from linkexcludes) AND username not in (select username from blacklists) and posted>'2009-12-15 05:37:47' )  GROUP BY url ORDER BY count(distinct username) desc LIMIT 100):
+  app/controllers/link_controller.rb:22:in `index'
+
+Rendered rescues/_trace (39.2ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (90.4ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinkController#index (for 127.0.0.1 at 2009-12-15 11:38:27) [GET]
+  [4;35;1mLink Load (1157.2ms)[0m   [0mSELECT *,count(distinct username) as c,id FROM `links` WHERE (url not in (select url from linkexcludes) AND username not in (select username from blacklists) and posted>'2009-12-15 05:38:27' ) GROUP BY url ORDER BY count(distinct username) desc LIMIT 100[0m
+  [4;36;1mLink Columns (89.7ms)[0m   [0;1mSHOW FIELDS FROM `links`[0m
+Completed in 1274ms (View: 1, DB: 1337) | 200 OK [http://localhost/link]
+  [4;35;1mSQL (97.5ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinkController#index (for 127.0.0.1 at 2009-12-15 11:40:01) [GET]
+  [4;36;1mLink Load (1163.1ms)[0m   [0;1mSELECT *,count(distinct username) as c,id FROM `links` WHERE (url not in (select url from linkexcludes) AND username not in (select username from blacklists) and posted>'2009-12-15 05:40:01' ) GROUP BY url ORDER BY count(distinct username) desc LIMIT 100[0m
+  [4;35;1mLink Columns (91.4ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+Completed in 1267ms (View: 1, DB: 1352) | 200 OK [http://localhost/link]
+  [4;36;1mSQL (92.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinkController#remove (for 127.0.0.1 at 2009-12-15 11:42:56) [GET]
+  Parameters: {"id"=>"2355695"}
+  [4;35;1mLink Columns (89.5ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+  [4;36;1mLink Load (91.9ms)[0m   [0;1mSELECT * FROM `links` WHERE (`links`.`id` = 2355695) [0m
+  [4;35;1mLinkexclude Load (88.0ms)[0m   [0mSELECT * FROM `linkexcludes` WHERE (url='http://wefollow.com') LIMIT 1[0m
+  [4;36;1mLinkexclude Columns (92.4ms)[0m   [0;1mSHOW FIELDS FROM `linkexcludes`[0m
+  [4;35;1mSQL (91.7ms)[0m   [0mBEGIN[0m
+  [4;36;1mLinkexclude Create (89.4ms)[0m   [0;1mINSERT INTO `linkexcludes` (`url`) VALUES('http://wefollow.com')[0m
+  [4;35;1mSQL (91.2ms)[0m   [0mCOMMIT[0m
+  [4;36;1mLink Load (1048.4ms)[0m   [0;1mSELECT *,count(distinct username) as c,id FROM `links` WHERE (url not in (select url from linkexcludes) AND username not in (select username from blacklists) and posted>'2009-12-15 05:42:56' ) GROUP BY url ORDER BY count(distinct username) desc LIMIT 100[0m
+Completed in 1701ms (View: 1, DB: 1775) | 200 OK [http://localhost/link/remove?id=2355695]
+  [4;35;1mSQL (95.4ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinkController#index (for 127.0.0.1 at 2009-12-15 12:20:38) [GET]
+  [4;36;1mLink Load (1320.2ms)[0m   [0;1mSELECT *,count(distinct username) as c,id FROM `links` WHERE (url not in (select url from linkexcludes) AND username not in (select username from blacklists) and posted>'2009-12-15 06:20:38' ) GROUP BY url ORDER BY count(distinct username) desc LIMIT 100[0m
+  [4;35;1mLink Columns (95.7ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+Completed in 1428ms (View: 1, DB: 1511) | 200 OK [http://localhost/link]
+  [4;36;1mSQL (87.4ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinkController#index (for 127.0.0.1 at 2009-12-15 13:01:23) [GET]
+  [4;35;1mLink Load (1273.5ms)[0m   [0mSELECT *,count(distinct username) as c,id FROM `links` WHERE (url not in (select url from linkexcludes) AND username not in (select username from blacklists) and posted>'2009-12-15 07:01:23' ) GROUP BY url ORDER BY count(distinct username) desc LIMIT 100[0m
+  [4;36;1mLink Columns (241.9ms)[0m   [0;1mSHOW FIELDS FROM `links`[0m
+Completed in 1529ms (View: 1, DB: 1603) | 200 OK [http://localhost/link]
+  [4;35;1mSQL (128.4ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinkController#index (for 127.0.0.1 at 2009-12-15 14:19:04) [GET]
+  [4;36;1mLink Load (1420.6ms)[0m   [0;1mSELECT *,count(distinct username) as c,id FROM `links` WHERE (url not in (select url from linkexcludes) AND username not in (select username from blacklists) and posted>'2009-12-15 08:19:04' ) GROUP BY url ORDER BY count(distinct username) desc LIMIT 100[0m
+  [4;35;1mLink Columns (89.6ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+Completed in 1616ms (View: 1, DB: 1639) | 200 OK [http://localhost/link]
+  [4;36;1mSQL (90.7ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinkController#index (for 127.0.0.1 at 2009-12-15 16:24:52) [GET]
+  [4;35;1mLink Load (1275.0ms)[0m   [0mSELECT *,count(distinct username) as c,id FROM `links` WHERE (url not in (select url from linkexcludes) AND username not in (select username from blacklists) and posted>'2009-12-15 10:24:52' ) GROUP BY url ORDER BY count(distinct username) desc LIMIT 100[0m
+  [4;36;1mLink Columns (88.9ms)[0m   [0;1mSHOW FIELDS FROM `links`[0m
+Completed in 1376ms (View: 1, DB: 1454) | 200 OK [http://localhost/link]
+  [4;35;1mSQL (91.5ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinkController#index (for 127.0.0.1 at 2009-12-15 16:29:29) [GET]
+  Parameters: {"q"=>"London"}
+  [4;36;1mLink Load (1274.7ms)[0m   [0;1mSELECT *,count(distinct username) as c,id FROM `links` WHERE (url not in (select url from linkexcludes) AND username not in (select username from blacklists) and posted>'2009-12-15 10:29:29' and text like '%London%') GROUP BY url ORDER BY count(distinct username) desc LIMIT 100[0m
+  [4;35;1mLink Columns (104.1ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+Completed in 1387ms (View: 1, DB: 1470) | 200 OK [http://localhost/link?q=London]

@@ -1,0 +1,37 @@
+<html>
+<head>
+<%=javascript_include_tag 'jquery-latest.js','wikiplaces.js'%>
+
+<%= stylesheet_link_tag 'question' %>
+</head>
+
+<body onload="onLoad();" onunload="unLoad();">
+
+	<div id="wrapper"> 
+		
+		
+        <div id="title"> 
+            <a href="/"><%=@title%></a> 
+        </div> 
+        <!--2--> 
+        <div id="content">
+			<%= yield  %>
+		</div>
+		<div id="sidebar"> 
+			<div id="top"> 
+				<div id="avatar"><a href="/"><img src="http://20.media.tumblr.com/avatar_f464ca9dabc1_128.png" /></a></div> 
+				
+	        	<div id="description">
+					<%if session['screen_name']!=nil%>
+						Logged in as <%=session['screen_name']%>
+					<%end%>
+				</div> 
+				
+			</div>
+			<div id="bottom"></div> 
+			<div id="copyright">Answer.it</div> 
+		</div>
+	</div>
+	
+</body>
+</html>
